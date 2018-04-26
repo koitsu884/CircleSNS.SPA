@@ -15,17 +15,10 @@
         <li routerLinkActive="active"><a>Member List</a></li>
         <li routerLinkActive="active"><a>Gallery</a></li>
       </ul>
-
-      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="navbar-form navbar-right" (ngSubmit)="login()">
-        <div class="form-group">
-          <input type="text" placeholder="UserName" class="form-control" required name="userName" [(ngModel)]="userName">
-        </div>
-        <div class="form-group">
-          <input type="password" placeholder="Password" class="form-control" required name="password" [(ngModel)]="password">
-        </div>
-        <button type="submit" class="btn btn-success" [disabled] = "!loginForm.valid">Sign in</button>
-      </form>
-
+      <ul *ngIf="!loggedIn()" class="nav navbar-nav navbar-right">
+        <li><a  [routerLink]="['/login']" >ログイン</a></li>
+        <li><a  [routerLink]="['/register']" >アカウント作成</a></li>
+      </ul>
       <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
         <li class="dropdown" dropdown>
            <a (click)="false" class="dropdown-toggle" dropdownToggle>Welcome {{userName}} <span class="caret"></span></a> 

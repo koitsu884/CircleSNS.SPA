@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../_models/User';
 import { UserService } from '../../../_services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { Member } from '../../../_models/Member';
 
 @Component({
   selector: 'app-member-list',
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  users: User[];
+  users: Member[];
   
   constructor(private userService: UserService, private route: ActivatedRoute) { }
 

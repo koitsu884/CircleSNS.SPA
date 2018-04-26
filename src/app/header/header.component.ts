@@ -18,27 +18,16 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
-    this.authService.login(this.userName, this.password)
-    .subscribe(data => {
-      this.alertify.success('logged in successfully');
-    }, error => {
-      this.alertify.error('failed to login');
-    }, () => {
-      //console.log(['/members']);
-    });
-    }
+  logout() {
+    this.authService.userToken = null;
+    this.authService.currentUser = null;
+    localStorage.removeItem('token');
+    localStorage.removeItem('userName');
+    this.alertify.message('Logged out');
+    this.router.navigate(['/home']);
+  }
 
-    logout() {
-      this.authService.userToken = null;
-      this.authService.currentUser = null;
-      localStorage.removeItem('token');
-      localStorage.removeItem('userName');
-      this.alertify.message('Logged out');
-      this.router.navigate(['/home']);
-    }
-
-    loggedIn() {
-      return this.authService.loggedIn();
-    }
+  loggedIn() {
+    return this.authService.loggedIn();
+  }
 }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthUser } from "../_models/authUser";
 import { Injectable } from "@angular/core";
-import { User } from "../_models/User";
+import { Member } from "../_models/Member";
 
 @Injectable()
 export class AuthService {
@@ -30,9 +30,9 @@ export class AuthService {
             });
     }
 
-    register(user: User) {
-        return this.httpClient.post(this.baseUrl + 'auth/register',
-            user,
+    registerMember(member: Member) {
+        return this.httpClient.post(this.baseUrl + 'member',
+            member,
             {
                 headers: new HttpHeaders().set('Content-Type', 'application/json')
             });
