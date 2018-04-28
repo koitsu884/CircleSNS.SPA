@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, defineLocale, BsLocaleService } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -19,6 +19,9 @@ import { RegisterMemberComponent } from './register/register-member/register-mem
 import { RegisterBusinessComponent } from './register/register-business/register-business.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './account/login/login.component';
+import { GlobalService } from './_services/global.service';
+import { CityListResolver } from './_resolvers/citylist.resolver';
+import { HomeTownListResolver } from './_resolvers/hometownlist.resolver';
 
 export function getAccessToken(): string {
   return  localStorage.getItem('token');
@@ -43,6 +46,7 @@ export function getAccessToken(): string {
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: getAccessToken,
@@ -51,11 +55,15 @@ export function getAccessToken(): string {
     })
   ],
   providers: [
+    GlobalService,
     AuthService,
     UserService,
     AuthGuard,
     AlertifyService,
-    MemberListResolver
+    MemberListResolver,
+    CityListResolver,
+    HomeTownListResolver,
+    BsLocaleService,
   ],
   bootstrap: [AppComponent]
 })

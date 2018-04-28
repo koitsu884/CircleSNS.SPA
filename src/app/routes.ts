@@ -6,11 +6,20 @@ import { MemberListResolver } from "./_resolvers/member-list.resolver";
 import { HomeComponent } from "./home/home.component";
 import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./account/login/login.component";
+import { CityListResolver } from "./_resolvers/citylist.resolver";
+import { HomeTownListResolver } from "./_resolvers/hometownlist.resolver";
 
 export const appRoutes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent},
+    {
+        path: 'register', 
+        component: RegisterComponent, 
+        resolve: {
+            cities:CityListResolver,
+            hometowns:HomeTownListResolver
+        }
+    },
     {
         path: '',
         runGuardsAndResolvers: 'always',

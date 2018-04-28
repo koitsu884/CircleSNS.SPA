@@ -11,7 +11,6 @@ export class MemberListResolver implements Resolve<Member[]> {
     constructor(private userService: UserService, private router: Router ){}
 
     resolve(route: ActivatedRouteSnapshot) : Observable<Member[]> {
-        console.log('Resolver');
         return this.userService.getUsers()
                 .catch(error => {
                     console.log('Error');
