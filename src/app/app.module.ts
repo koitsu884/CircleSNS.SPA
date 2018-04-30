@@ -20,8 +20,12 @@ import { RegisterBusinessComponent } from './register/register-business/register
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './account/login/login.component';
 import { GlobalService } from './_services/global.service';
+import { TimeAgoPipe } from 'time-ago-pipe';
 import { CityListResolver } from './_resolvers/citylist.resolver';
 import { HomeTownListResolver } from './_resolvers/hometownlist.resolver';
+import { MemberHomeComponent } from './members/member-home/member-home.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberHomeResolver } from './_resolvers/member-home.resolver';
 
 export function getAccessToken(): string {
   return  localStorage.getItem('token');
@@ -32,11 +36,14 @@ export function getAccessToken(): string {
     AppComponent,
     HeaderComponent,
     LoginComponent,
+    MemberHomeComponent,
     MemberListComponent,
+    MemberDetailComponent,
     RegisterComponent,
     HomeComponent,
     RegisterMemberComponent,
-    RegisterBusinessComponent
+    RegisterBusinessComponent,
+    TimeAgoPipe
 ],
   imports: [
     BrowserModule,
@@ -61,6 +68,7 @@ export function getAccessToken(): string {
     AuthGuard,
     AlertifyService,
     MemberListResolver,
+    MemberHomeResolver,
     CityListResolver,
     HomeTownListResolver,
     BsLocaleService,

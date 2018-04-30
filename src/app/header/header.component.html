@@ -7,12 +7,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" >Bora-Bora- Circle</a>
+      <a class="navbar-brand" [routerLink]="['/home']">Bora-Bora- Circle</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active"><a>About us</a></li>
-        <li routerLinkActive="active"><a>Member List</a></li>
+        <li *ngIf="loggedIn()" routerLinkActive="active"><a [routerLink]="['/member']" >メンバーページ</a></li>
         <li routerLinkActive="active"><a>Gallery</a></li>
       </ul>
       <ul *ngIf="!loggedIn()" class="nav navbar-nav navbar-right">
@@ -21,7 +20,7 @@
       </ul>
       <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
         <li class="dropdown" dropdown>
-           <a (click)="false" class="dropdown-toggle" dropdownToggle>Welcome {{userName}} <span class="caret"></span></a> 
+           <a (click)="false" class="dropdown-toggle" dropdownToggle>Welcome  {{currentMemberName()}}  <span class="caret"></span></a> 
            <ul class="dropdown-menu" *dropdownMenu>
              <li role="separator" class="divider"></li>
              <li><a (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a></li>

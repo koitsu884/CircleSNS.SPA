@@ -8,6 +8,7 @@ import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./account/login/login.component";
 import { CityListResolver } from "./_resolvers/citylist.resolver";
 import { HomeTownListResolver } from "./_resolvers/hometownlist.resolver";
+import { MemberHomeComponent } from "./members/member-home/member-home.component";
 
 export const appRoutes: Routes = [
     {path: 'home', component: HomeComponent},
@@ -25,6 +26,7 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
+            {path: 'member', component: MemberHomeComponent},
             {path: 'members', component: MemberListComponent, resolve: {users:MemberListResolver}}
         ]
     },

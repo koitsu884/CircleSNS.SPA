@@ -9,8 +9,6 @@ import { AlertifyService } from '../_services/alertify.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  userName: string;
-  password: string;
   constructor(private authService:AuthService,
               private router: Router,
               private alertify: AlertifyService) { }
@@ -20,14 +18,20 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.userToken = null;
-    this.authService.currentUser = null;
+    this.authService.currentUseName = null;
+    this.authService.currentMember = null;
     localStorage.removeItem('token');
-    localStorage.removeItem('userName');
+    localStorage.removeItem('currentUseName');
+    localStorage.removeItem('currentMember');
     this.alertify.message('Logged out');
     this.router.navigate(['/home']);
   }
 
   loggedIn() {
     return this.authService.loggedIn();
+  }
+
+  currentMemberName(){
+    return this.authService.currentMember.displayName;
   }
 }

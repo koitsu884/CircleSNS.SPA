@@ -10,22 +10,26 @@ export class AuthService {
     baseUrl = environment.apiUrl;
     userToken: string;
     decodedToken: string;
-    currentUser: string;
+    currentUseName: string;
+    currentMember: Member;
 
     constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService) { }
 
-    login(userName: string, password: string) {
-        return this.httpClient.post<AuthUser>(this.baseUrl + 'auth/login', { "UserName": userName, "Password": password }, {
+    login(userName: string, password: string, isMember = true) {
+        return this.httpClient.post<AuthUser>(this.baseUrl + 'auth/login', { "UserName": userName, "Password": password, "IsMember": isMember }, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json')
         })
             .map(user => {
                 if (user) {
+                    console.log(user);
                     localStorage.setItem('token', user.tokenString);
-                    localStorage.setItem('userName', JSON.stringify(user.userName));
+                    localStorage.setItem('currentUserName', JSON.stringify(user.userName));
+                    localStorage.setItem('currentMember', JSON.stringify(user.member));
                     this.decodedToken = this.jwtHelperService.decodeToken(user.tokenString);
                     this.userToken = user.tokenString;
-                    this.currentUser = user.userName;
+                    this.currentUseName = user.userName;
+                    this.currentMember = user.member;
                 }
             });
     }

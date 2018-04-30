@@ -4,9 +4,11 @@ export interface Member {
     displayName: string;
     dateOfBirth?: Date;
     gender: string;
-    city: string;
-    hometown: string;
+    city?: string;
+    homeTown?: string;
+    photoUrl: string;
     introduction: string;
-    interests?: string;
+    interests: string;
     lastActive: Date;
+    created: Date;
 }
