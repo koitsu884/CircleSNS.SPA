@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../_services/user.service';
+import { UserService } from '../../../../_services/user.service';
 import { ActivatedRoute } from '@angular/router';
-import { Member } from '../../../_models/Member';
+import { Member } from '../../../../_models/Member';
 
 @Component({
   selector: 'app-member-list',

@@ -9,23 +9,24 @@ import { AuthService } from './_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
-import { MemberListComponent } from './members/member-list/member-list/member-list.component';
+import { MemberListComponent } from './users/members/member-list/member-list/member-list.component';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { AlertifyService } from './_services/alertify.service';
 import { HomeComponent } from './home/home.component';
-import { RegisterMemberComponent } from './register/register-member/register-member.component';
-import { RegisterBusinessComponent } from './register/register-business/register-business.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './account/login/login.component';
 import { GlobalService } from './_services/global.service';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { CityListResolver } from './_resolvers/citylist.resolver';
 import { HomeTownListResolver } from './_resolvers/hometownlist.resolver';
-import { MemberHomeComponent } from './members/member-home/member-home.component';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberHomeComponent } from './users/members/member-home/member-home.component';
+import { MemberDetailComponent } from './users/members/member-detail/member-detail.component';
 import { MemberHomeResolver } from './_resolvers/member-home.resolver';
+import { FooterComponent } from './footer/footer.component';
+import { MemberEditComponent } from './users/members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 
 export function getAccessToken(): string {
   return  localStorage.getItem('token');
@@ -35,15 +36,16 @@ export function getAccessToken(): string {
   declarations: [
     AppComponent,
     HeaderComponent,
+    FooterComponent,
     LoginComponent,
     MemberHomeComponent,
     MemberListComponent,
     MemberDetailComponent,
+    MemberEditComponent,
     RegisterComponent,
     HomeComponent,
-    RegisterMemberComponent,
-    RegisterBusinessComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    FooterComponent
 ],
   imports: [
     BrowserModule,
@@ -69,6 +71,7 @@ export function getAccessToken(): string {
     AlertifyService,
     MemberListResolver,
     MemberHomeResolver,
+    MemberEditResolver,
     CityListResolver,
     HomeTownListResolver,
     BsLocaleService,

@@ -17,12 +17,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.userToken = null;
-    this.authService.currentUseName = null;
-    this.authService.currentMember = null;
-    localStorage.removeItem('token');
-    localStorage.removeItem('currentUseName');
-    localStorage.removeItem('currentMember');
+    this.authService.logout();
     this.alertify.message('Logged out');
     this.router.navigate(['/home']);
   }
@@ -32,6 +27,6 @@ export class HeaderComponent implements OnInit {
   }
 
   currentMemberName(){
-    return this.authService.currentMember.displayName;
+    return this.authService.displayName;
   }
 }

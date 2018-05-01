@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Member } from '../../_models/Member';
+import { Member } from '../../../_models/Member';
 
 @Component({
   selector: 'app-member-detail',

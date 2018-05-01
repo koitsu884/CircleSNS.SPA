@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from '../../_models/Member';
-import { AuthService } from '../../_services/auth.service';
+import { Member } from '../../../_models/Member';
+import { AuthService } from '../../../_services/auth.service';
 
 @Component({
   selector: 'app-member-home',
@@ -12,6 +12,6 @@ export class MemberHomeComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.member = this.authService.currentMember;
+    //this.member = this.authService.currentMember;
   }
 }

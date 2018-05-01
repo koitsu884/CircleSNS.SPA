@@ -73,18 +73,18 @@ export class RegisterMemberComponent implements OnInit {
   register() {
     //console.log(this.registerForm.value);
     
-    if(this.registerForm.valid){
-      this.member = Object.assign({}, this.registerForm.value);
-      console.log(this.member);
-      this.authService.registerMember(this.member).subscribe(() => {
-        this.alertify.success('アカウントが作成されました');
-      }, error => {
-        this.alertify.error(error);
-      }, () => {
-        this.authService.login(this.member.username, this.registerForm.value.password).subscribe(() => {
-          this.router.navigate(['/home']);
-        })
-      })
-    }
+    // if(this.registerForm.valid){
+    //   this.member = Object.assign({}, this.registerForm.value);
+    //   console.log(this.member);
+    //   this.authService.registerMember(this.member).subscribe(() => {
+    //     this.alertify.success('アカウントが作成されました');
+    //   }, error => {
+    //     this.alertify.error(error);
+    //   }, () => {
+    //     this.authService.login(this.member.username, this.registerForm.value.password).subscribe(() => {
+    //       this.router.navigate(['/home']);
+    //     })
+    //   })
+    // }
   }
 }

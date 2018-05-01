@@ -9,9 +9,10 @@ import { Member } from "../_models/Member";
 export class AuthService {
     baseUrl = environment.apiUrl;
     userToken: string;
-    decodedToken: string;
-    currentUseName: string;
-    currentMember: Member;
+    decodedToken: any;
+    userType: string;
+    userId: number;
+    displayName: string;
 
     constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService) { }
 
@@ -24,23 +25,45 @@ export class AuthService {
                 if (user) {
                     console.log(user);
                     localStorage.setItem('token', user.tokenString);
-                    localStorage.setItem('currentUserName', JSON.stringify(user.userName));
-                    localStorage.setItem('currentMember', JSON.stringify(user.member));
+                    localStorage.setItem('displayName', JSON.stringify(user.displayName));
+                    localStorage.setItem('userType', JSON.stringify(user.userType));
+                    localStorage.setItem('userId', JSON.stringify(user.relatedUserClassId));
                     this.decodedToken = this.jwtHelperService.decodeToken(user.tokenString);
                     this.userToken = user.tokenString;
-                    this.currentUseName = user.userName;
-                    this.currentMember = user.member;
+                    this.userId = user.relatedUserClassId;
+                    this.displayName = user.displayName;
+                    this.userType = user.userType;
                 }
             });
     }
 
-    registerMember(member: Member) {
-        return this.httpClient.post(this.baseUrl + 'member',
-            member,
+    logout(){
+        this.userToken = null;
+        this.decodedToken = null;
+        this.displayName = null;
+        this.userType = null;
+        this.userId = null;
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userType');
+        localStorage.removeItem('displayName');
+    }
+
+    registerUser(user: any) {
+        return this.httpClient.post(this.baseUrl + 'auth',
+            user,
             {
                 headers: new HttpHeaders().set('Content-Type', 'application/json')
             });
     }
+
+    // registerMember(member: Member) {
+    //     return this.httpClient.post(this.baseUrl + 'member',
+    //         member,
+    //         {
+    //             headers: new HttpHeaders().set('Content-Type', 'application/json')
+    //         });
+    // }
 
     loggedIn() {
         const token = this.jwtHelperService.tokenGetter();
