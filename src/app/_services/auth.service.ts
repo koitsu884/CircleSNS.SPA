@@ -4,15 +4,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthUser } from "../_models/authUser";
 import { Injectable } from "@angular/core";
 import { Member } from "../_models/Member";
+import { AppUser } from "../_models/AppUser";
 
 @Injectable()
 export class AuthService {
     baseUrl = environment.apiUrl;
     userToken: string;
     decodedToken: any;
-    userType: string;
-    userId: number;
-    displayName: string;
+    appUser: AppUser;
 
     constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService) { }
 
@@ -25,14 +24,10 @@ export class AuthService {
                 if (user) {
                     console.log(user);
                     localStorage.setItem('token', user.tokenString);
-                    localStorage.setItem('displayName', JSON.stringify(user.displayName));
-                    localStorage.setItem('userType', JSON.stringify(user.userType));
-                    localStorage.setItem('userId', JSON.stringify(user.relatedUserClassId));
+                    localStorage.setItem('appUser', JSON.stringify(user.appUser));
                     this.decodedToken = this.jwtHelperService.decodeToken(user.tokenString);
                     this.userToken = user.tokenString;
-                    this.userId = user.relatedUserClassId;
-                    this.displayName = user.displayName;
-                    this.userType = user.userType;
+                    this.appUser = user.appUser;
                 }
             });
     }
@@ -40,13 +35,9 @@ export class AuthService {
     logout(){
         this.userToken = null;
         this.decodedToken = null;
-        this.displayName = null;
-        this.userType = null;
-        this.userId = null;
+        this.appUser = null;
         localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('userType');
-        localStorage.removeItem('displayName');
+        localStorage.removeItem('appUser');
     }
 
     registerUser(user: any) {
@@ -57,13 +48,13 @@ export class AuthService {
             });
     }
 
-    // registerMember(member: Member) {
-    //     return this.httpClient.post(this.baseUrl + 'member',
-    //         member,
-    //         {
-    //             headers: new HttpHeaders().set('Content-Type', 'application/json')
-    //         });
-    // }
+    updateUser(user: any) {
+        return this.httpClient.put(this.baseUrl + 'appuser/' + this.decodedToken.nameid,
+            user,
+            {
+                headers: new HttpHeaders().set('Content-Type', 'application/json')
+            });
+    }
 
     loggedIn() {
         const token = this.jwtHelperService.tokenGetter();
@@ -73,5 +64,13 @@ export class AuthService {
         }
 
         return !this.jwtHelperService.isTokenExpired(token);
+    }
+
+    loggedInAsBusiness(){
+        return this.loggedIn() && this.appUser.userType == "Business";
+    }
+
+    loggedInAsMember(){
+        return this.loggedIn() && this.appUser.userType == "Member";
     }
 }

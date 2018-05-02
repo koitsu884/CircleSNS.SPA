@@ -4,13 +4,9 @@
       <div class="tab-panel">
         <tabset class="member-tabset">
           <tab heading="Edit Profile">
-            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
-              <h4>アカウント情報</h4>
-              
-              <textarea class="form-control" name="introduction" rows="6" [(ngModel)]="user.introduction"></textarea>
-              <h4>プロフィール</h4>
-              <textarea class="form-control" name="lookingFor" rows="6" [(ngModel)]="user.lookingFor"></textarea>
-            </form>
+            <h4>アカウント情報</h4>
+            <app-user-edit></app-user-edit>
+            <h4>プロフィール</h4>
           </tab>
           <tab heading="Edit Photos">
             <p>Photo editor</p>

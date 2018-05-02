@@ -26,7 +26,15 @@ export class HeaderComponent implements OnInit {
     return this.authService.loggedIn();
   }
 
+  loggedInAsBusiness(){
+      return this.authService.loggedInAsBusiness();
+  }
+
+  loggedInAsMember(){
+    return this.authService.loggedInAsMember();
+  }
+
   currentMemberName(){
-    return this.authService.displayName;
+    return this.authService.appUser.displayName;
   }
 }

@@ -27,6 +27,17 @@ import { MemberHomeResolver } from './_resolvers/member-home.resolver';
 import { FooterComponent } from './footer/footer.component';
 import { MemberEditComponent } from './users/members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { BusinessHomeComponent } from './users/businesses/business-home/business-home.component';
+import { BusinessEditComponent } from './users/businesses/business-edit/business-edit.component';
+import { BusinessHomeResolver } from './_resolvers/business-home.resolver';
+import { MemberGuard } from './_guards/member.guard';
+import { BusinessGuard } from './_guards/business.guard';
+import { MemberService } from './_services/member.service';
+import { BusinessUserService } from './_services/businessuser.service';
+import { BusinessDetailComponent } from './users/businesses/business-detail/business-detail.component';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { PasswordEditComponent } from './users/password-edit/password-edit.component';
 
 export function getAccessToken(): string {
   return  localStorage.getItem('token');
@@ -38,10 +49,15 @@ export function getAccessToken(): string {
     HeaderComponent,
     FooterComponent,
     LoginComponent,
+    UserEditComponent,
+    PasswordEditComponent,
     MemberHomeComponent,
     MemberListComponent,
     MemberDetailComponent,
     MemberEditComponent,
+    BusinessHomeComponent,
+    BusinessEditComponent,
+    BusinessDetailComponent,
     RegisterComponent,
     HomeComponent,
     TimeAgoPipe,
@@ -67,13 +83,23 @@ export function getAccessToken(): string {
     GlobalService,
     AuthService,
     UserService,
-    AuthGuard,
+    MemberService,
+    BusinessUserService,
     AlertifyService,
+
+    AuthGuard,
+    MemberGuard,
+    BusinessGuard,
+
     MemberListResolver,
     MemberHomeResolver,
     MemberEditResolver,
+    BusinessHomeResolver,
     CityListResolver,
     HomeTownListResolver,
+
+    ErrorInterceptorProvider,
+    //Third Party
     BsLocaleService,
   ],
   bootstrap: [AppComponent]

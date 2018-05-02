@@ -1,0 +1,11 @@
+<div class="row">
+  <form #userEditForm="ngForm" id="userEditForm" (ngSubmit) = "submit()">
+    <label for="userName">ユーザーネーム</label>
+    <input class="form-control" type="text" name="userName" [(ngModel)]="userName"/>
+    <label for="email">Eメール</label>
+    <input class="form-control" type="text" name="email" [(ngModel)]="appUser.email"/>
+    <label for="displayName">表示名</label>
+    <input class="form-control" type="text" name="displayName" [(ngModel)]="appUser.displayName"/>
+    <button class="form-control" type="submit">更新</button>
+  </form>
+</div>

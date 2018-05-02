@@ -11,6 +11,12 @@ import { HomeTownListResolver } from "./_resolvers/hometownlist.resolver";
 import { MemberHomeComponent } from "./users/members/member-home/member-home.component";
 import { MemberEditComponent } from "./users/members/member-edit/member-edit.component";
 import { MemberEditResolver } from "./_resolvers/member-edit.resolver";
+import { MemberHomeResolver } from "./_resolvers/member-home.resolver";
+import { MemberGuard } from "./_guards/member.guard";
+import { BusinessGuard } from "./_guards/business.guard";
+import { BusinessHomeComponent } from "./users/businesses/business-home/business-home.component";
+import { BusinessHomeResolver } from "./_resolvers/business-home.resolver";
+import { BusinessEditComponent } from "./users/businesses/business-edit/business-edit.component";
 
 export const appRoutes: Routes = [
     {path: 'home', component: HomeComponent},
@@ -26,9 +32,9 @@ export const appRoutes: Routes = [
     {
         path: '',
         runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard],
+        canActivate: [MemberGuard],
         children: [
-            {path: 'member', component: MemberHomeComponent},
+            {path: 'member', component: MemberHomeComponent, resolve: {member:MemberHomeResolver}},
             {
                 path: 'member/edit',
                 component: MemberEditComponent,
@@ -39,6 +45,23 @@ export const appRoutes: Routes = [
                 }
             },
             {path: 'members', component: MemberListComponent, resolve: {users:MemberListResolver}}
+        ]
+    },
+    {
+        path: '',
+        runGuardsAndResolvers: 'always',
+        canActivate: [BusinessGuard],
+        children: [
+            {path: 'business', component: BusinessHomeComponent, resolve: {bisuser:BusinessHomeResolver}},
+            {
+                path: 'business/edit',
+                component: BusinessEditComponent,
+                resolve: {
+                    //member:MemberEditResolver,
+                    cities:CityListResolver,
+                    hometowns:HomeTownListResolver
+                }
+            }
         ]
     },
     {path: '**', redirectTo: 'home', pathMatch: 'full'},

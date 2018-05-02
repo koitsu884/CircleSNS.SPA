@@ -11,8 +11,8 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li *ngIf="loggedIn()" routerLinkActive="active"><a [routerLink]="['/member']" >メンバーページ</a></li>
-        <li routerLinkActive="active"><a>Gallery</a></li>
+        <li *ngIf="loggedInAsMember() " routerLinkActive="active"><a [routerLink]="['/member']" >メンバーページ</a></li>
+        <li *ngIf="loggedInAsBusiness() " routerLinkActive="active"><a [routerLink]="['/business']" >マイページ</a></li>
       </ul>
       <ul *ngIf="!loggedIn()" class="nav navbar-nav navbar-right">
         <li><a  [routerLink]="['/login']" >ログイン</a></li>

@@ -1,8 +1,6 @@
-import { Member } from "./Member";
+import {AppUser} from "./AppUser";
 
 export interface AuthUser {
     tokenString: string;
-    displayName: string;
-    userType: string;
-    relatedUserClassId: number;
+    appUser: AppUser;
 }

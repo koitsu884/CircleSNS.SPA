@@ -16,8 +16,4 @@ export class MemberService {
     getMember(id: number){
         return this.authHttp.get<Member>(this.baseUrl + 'member/' + id);
     }
-
-    getMemberByUserId(userId: string){
-        return this.authHttp.get<Member>(this.baseUrl + 'member/' + userId);
-    }
 }

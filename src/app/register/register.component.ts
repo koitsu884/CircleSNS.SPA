@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
@@ -26,12 +26,12 @@ export class RegisterComponent implements OnInit {
 
   createRegistarForm() {
     this.registerForm = this.fb.group({
-      username:['', Validators.required],
+      username:[ '', Validators.required],
       email:['', [Validators.required, Validators.email]],
       displayName:[''],
       userType : ['Member'],
       password: ['',
-                 [Validators.required, Validators.minLength(this.passwordMinLength), Validators.maxLength(this.passwordMaxLength)]
+                   [Validators.required, Validators.minLength(this.passwordMinLength), Validators.maxLength(this.passwordMaxLength)]
                 ],
       confirmPassword: ['', Validators.required]         
     }, {validator: this.passwordMatchValidator})
@@ -46,7 +46,6 @@ export class RegisterComponent implements OnInit {
     
     if(this.registerForm.valid){
       this.user = Object.assign({}, this.registerForm.value);
-      console.log(this.user);
       this.authService.registerUser(this.user).subscribe(() => {
         this.alertify.success('アカウントが作成されました');
       }, error => {
@@ -58,5 +57,4 @@ export class RegisterComponent implements OnInit {
       })
     }
   }
-
 }
